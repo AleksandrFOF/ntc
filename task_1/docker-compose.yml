@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+### REDIS ###############################################
+  redis:
+    build: ./redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ./redis:/data
+    depends_on:
+      - db
+### NGINX ###############################################
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/usr/share/nginx/html
+    depends_on:
+      - redis
+### MSQL ################################################
+  db:
+    build: ./db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DEFAULT_PASSWORD}
+    volumes:
+      - ./databases:/var/opt/mysql
+      - ./citys.sql:/docker-entrypoint-initdb.d/citys.sql:ro
+
+  adminer:
+    build: ./adminer
+    restart: always
+    ports:
+      - 6080:8080
