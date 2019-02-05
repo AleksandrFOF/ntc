@@ -12,3 +12,8 @@ ansible_server commands:
 
 ubuntu_with_nginx commands:
 1. In order to get the requested configuration, it is enough to make minor changes to the following file: /etc/nginx/sites-available/default
+
+### TASK_3 ###
+Short description
+  
+Development -> Git push -> Gerrit verification/build/run tests (using CI server) -> Git merge -> Auto Deploy to the BRM
