@@ -1,0 +1,13 @@
+[ubuntu_apache2]
+ubuntu_apache2    ansible_host=192.168.59.130
+
+[ubuntu_nginx]
+ubuntu_nginx      ansible_host=192.168.59.144
+
+[centos_server]
+centos_server     ansible_host=192.168.59.141
+
+[All_WEB_SERVERS:children]
+ubuntu_apache2
+ubuntu_nginx
+centos_server

@@ -1,0 +1,35 @@
+---
+
+- name: Install default Apache WebServer
+  hosts: centos_server
+  become: yes
+
+  tasks:
+  - name: Install Apache WebServer
+    yum:  name=httpd state=latest
+
+  - name: Start Apache and Enable it on every boot
+    service: name=httpd state=started enabled=yes
+
+- name: Install default Apache2 Web Server
+  hosts: ubuntu_apache2
+  become: yes
+
+  tasks:
+  - name: Install Apache2 WebServer
+    apt:  name=apache2 state=latest
+
+  - name: Start Apache2 and Enable it on every boot
+    service: name=apache2 state=started
+
+- name: Install default Nginx Web Server
+  hosts: ubuntu_nginx
+  become: yes
+
+  tasks:
+  - name: Install Nginx WebServer
+    apt:  name=nginx state=latest
+
+  - name: Start Nginx and Enable it on every boot
+    service: name=nginx state=started enabled=yes
+
